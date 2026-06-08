@@ -6,8 +6,7 @@ from simpson import simpson_python, simpson_numpy
 from saisie_utilisateur import demander_bornes, demander_entier_positif, demander_coefficients
 from methodes_preprogrammees import trapezes_scipy, simpson_scipy
 
-from time import perf_counter
-from timeit import timeit
+from benchmark_projet_B import benchmark_perf_counter, benchmark_timeit
 
 
 if __name__ == "__main__":
@@ -90,8 +89,8 @@ if __name__ == "__main__":
     REPETITIONS = demander_entier_positif("nombre de répétitions pour le benchmark: ")
 
     methodes = [
-        ("Rectangles Python",  rectangles_python),
-        ("Rectangles NumPy ",  rectangles_numpy),
+        ("Rectangles Python", rectangles_python),
+        ("Rectangles NumPy ", rectangles_numpy),
         ("Trapèzes    Python", integration_trapezes_python),
         ("Trapèzes    NumPy ", integration_trapezes),
         ("Simpson     Python", simpson_python),
@@ -103,15 +102,5 @@ if __name__ == "__main__":
     print("\n" + "=" * 60)
     print("  BENCHMARK")
     print("=" * 60)
-
-    print(f"\n─ perf_counter (une seule exécution) ─")
-    for nom, fn in methodes:
-        tic = perf_counter()
-        fn(*PARAMETRES)
-        toc = perf_counter()
-        print(f"  {nom} : {toc - tic:.6f} [s]")
-
-    print(f"\n─ timeit ({REPETITIONS} répétitions) ─")
-    for nom, fn in methodes:
-        total = timeit(lambda fn=fn: fn(*PARAMETRES), number=REPETITIONS)
-        print(f"  {nom} : total = {total:.4f} [s]  |  moyenne = {total / REPETITIONS:.6f} [s]")
+    benchmark_perf_counter(methodes, PARAMETRES, valeur_exacte)
+    benchmark_timeit(methodes, PARAMETRES, REPETITIONS)
