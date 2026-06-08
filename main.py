@@ -4,7 +4,7 @@ from rectangles import rectangles_python, rectangles_numpy
 from trapezes import integration_trapezes_python, integration_trapezes
 from simpson import simpson_python, simpson_numpy
 from saisie_utilisateur import demander_bornes, demander_entier_positif, demander_coefficients
-from analyse import convergence, generer_liste_n,tracer_convergence
+from analyse import convergence, generer_liste_n,tracer_convergence, temps_selon_n, tracer_temps
 from methodes_preprogrammees import trapezes_scipy, simpson_scipy
 
 from benchmark_projet_B import benchmark_perf_counter, benchmark_timeit
@@ -132,3 +132,16 @@ if __name__ == "__main__":
     print("=" * 60)
     benchmark_perf_counter(methodes, PARAMETRES, valeur_exacte)
     benchmark_timeit(methodes, PARAMETRES, REPETITIONS)
+
+#graphique du temps de calcul vs n
+    dictionnaire_temps = {
+        "Rectangles Python": temps_selon_n(rectangles_python, a, b, liste_n, p1, p2, p3, p4),
+        "Rectangles NumPy": temps_selon_n(rectangles_numpy, a, b, liste_n, p1, p2, p3, p4),
+        "Trapèzes Python": temps_selon_n(integration_trapezes_python, a, b, liste_n, p1, p2, p3, p4),
+        "Trapèzes NumPy": temps_selon_n(integration_trapezes, a, b, liste_n, p1, p2, p3, p4),
+        "Simpson Python": temps_selon_n(simpson_python, a, b, liste_n, p1, p2, p3, p4),
+        "Simpson NumPy": temps_selon_n(simpson_numpy, a, b, liste_n, p1, p2, p3, p4),
+    }
+    tracer_temps(liste_n, dictionnaire_temps)
+
+

@@ -1,5 +1,6 @@
 from fonction_erreur import calculer_erreur
 import matplotlib.pyplot as plt
+from time import perf_counter
 
 def convergence(fonction_integration, a, b, liste_n, p1, p2, p3, p4, valeur_exacte): #
     #ici fonction intégration servira à appeler chaque méthode différente
@@ -51,5 +52,48 @@ def tracer_convergence(liste_n, dictionnaire_erreurs, nom_fichier="convergence.p
     ax.grid(True, which="both")  # which="both" : grille sur grandes (puissances de 10) et petites graduations (valeurs intermédiaires)
 
     # sauvegarde dans un fichier (l'extension determine le format) et l'affichage
+    fig.savefig(nom_fichier)
+    plt.show()
+
+
+def temps_selon_n(fonction_integration, a, b, liste_n, p1, p2, p3, p4):
+    #mesure le temps de calcul d'une methode d'integration pour plusieurs n
+    #renvoie la liste des temps (en secondes), un temps par valeur de n
+
+    liste_temps = []  # on stockera ici le temps obtenu pour chaque n
+
+    # On parcourt chaque nombre de segments demandé
+    for n in liste_n:
+        debut = perf_counter()  # top chrono avant
+        fonction_integration(a, b, n, p1, p2, p3, p4)  # on lance le calcul
+        fin = perf_counter()  # top chrono après
+
+        temps = fin - debut  # durée du calcul pour ce n
+        liste_temps.append(temps)  # on ajoute le temps à la liste
+
+    return liste_temps
+
+
+def tracer_temps(liste_n, dictionnaire_temps, nom_fichier="temps.png"):
+    #exactement la même méthode que pour la fonction tracer convergence
+    # mais au lieu de calculer l'erreur, on mesure le temps d'execution avec perf_counter
+    #trace le graphique du temps de calcul en fonction du nombre de segments n,
+    #en échelle logarithmique sur les deux axes (loglog)
+
+    fig, ax = plt.subplots(figsize=(8, 6))  # creation figure et axes
+
+    # Pour chaque methode du dictionnaire, on trace une courbe
+    for nom_methode in dictionnaire_temps:
+        liste_temps = dictionnaire_temps[nom_methode]
+        ax.loglog(liste_n, liste_temps, marker='o', label=nom_methode)
+
+    # Habillage du graphique (une seule fois, apres la boucle)
+    ax.set_xlabel("nombre de segments n")
+    ax.set_ylabel("temps de calcul (en secondes)")
+    ax.set_title("temps de calcul des methodes d'integration")
+    ax.legend()
+    ax.grid(True, which="both")
+
+    # Sauvegarde et affichage
     fig.savefig(nom_fichier)
     plt.show()
