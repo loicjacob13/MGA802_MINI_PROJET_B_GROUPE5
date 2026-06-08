@@ -42,7 +42,7 @@ def integration_trapezes_python(a, b, n, p1, p2, p3, p4):
 
 def integration_trapezes(a, b, n, p1, p2, p3, p4):
     largeur_segment = (b - a) / n
-    points=nb.linspace (a, b, n+1) #on crée les n+1 points qui vont délimiter les n segments de [a,b]
+    points=np.linspace (a, b, n+1) #on crée les n+1 points qui vont délimiter les n segments de [a,b]
     valeurs=fonction_polynome(points, p1, p2, p3, p4) #pour chaque n+1 pointsd on calcule l'image de la fonction
 
     #par mesure de simplification, on va faire 2 listses qui pour chaque segemnts n, on aura la,valeur de la fonction à gauche et à droite
