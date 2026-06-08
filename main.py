@@ -23,6 +23,9 @@ if __name__ == "__main__":
     #nombre de segments
     n=demander_entier_positif("nombre de segments n: ")
 
+    # solution analytique (valeur exacte de l'intégrale qui servira de référence)
+    valeur_exacte = solution_analytique(a, b, p1, p2, p3, p4)
+
 #étude de la convergence de la solution selon le nombre de segments n
     # on génère automatiquement la liste des n à tester (10, 20, 40, ... )
     liste_n = generer_liste_n()
@@ -44,7 +47,6 @@ if __name__ == "__main__":
     }
     tracer_convergence(liste_n, dictionnaire_erreurs)
     
-
 
 
     #solution analytique de l'intégrale
