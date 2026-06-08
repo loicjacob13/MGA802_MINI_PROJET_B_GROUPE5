@@ -4,6 +4,7 @@ from rectangles import rectangles_python, rectangles_numpy
 from trapezes import integration_trapezes_python, integration_trapezes
 from simpson import simpson_python, simpson_numpy
 from saisie_utilisateur import demander_bornes, demander_entier_positif, demander_coefficients
+from analyse import convergence, generer_liste_n,tracer_convergence
 from methodes_preprogrammees import trapezes_scipy, simpson_scipy
 
 
@@ -18,6 +19,30 @@ if __name__ == "__main__":
 
     #nombre de segments
     n=demander_entier_positif("nombre de segments n: ")
+
+#étude de la convergence de la solution selon le nombre de segments n
+    # on génère automatiquement la liste des n à tester (10, 20, 40, ... )
+    liste_n = generer_liste_n()
+
+    #on va calculer l'erreur pour chaque méthode sur toute la liste de n
+    erreurs_rect_python = convergence(rectangles_python, a, b, liste_n, p1, p2, p3, p4, valeur_exacte)
+    erreurs_rect_numpy = convergence(rectangles_numpy, a, b, liste_n, p1, p2, p3, p4, valeur_exacte)
+    erreurs_trap_python = convergence(integration_trapezes_python, a, b, liste_n, p1, p2, p3, p4, valeur_exacte)
+    erreurs_trap_numpy = convergence(integration_trapezes, a, b, liste_n, p1, p2, p3, p4, valeur_exacte)
+    erreurs_simp_python = convergence(simpson_python, a, b, liste_n, p1, p2, p3, p4, valeur_exacte)
+    erreurs_simp_numpy = convergence(simpson_numpy, a, b, liste_n, p1, p2, p3, p4, valeur_exacte)
+
+#graphique de convergence (erreur vs n), on se sert du dictionnaire explicité dans le module analyse.py
+    # chaque valeur du dictionnaire renvoie une liste, une erreur par valeur de n
+    dictionnaire_erreurs = {
+        "Rectangles": erreurs_rect_python,
+        "Trapèzes": erreurs_trap_python,
+        "Simpson": erreurs_simp_python,
+    }
+    tracer_convergence(liste_n, dictionnaire_erreurs)
+    
+
+
 
     #solution analytique de l'intégrale
     valeur_exacte=solution_analytique(a,b,p1,p2,p3,p4)
@@ -77,6 +102,7 @@ if __name__ == "__main__":
     print("MÉTHODE DE SIMPSON")
     print(f"  Python : aire = {aire_simp_python:.10f}   erreur = {erreur_simp_python:.2e}")
     print(f"  NumPy  : aire = {aire_simp_numpy:.10f}   erreur = {erreur_simp_numpy:.2e}")
+
 
     # méthodes pré-programmées (SciPy)
     print("MÉTHODES PRÉ-PROGRAMMÉES (SciPy)")
