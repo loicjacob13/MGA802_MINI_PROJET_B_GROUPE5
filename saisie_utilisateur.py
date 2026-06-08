@@ -1,7 +1,3 @@
-
-
-
-
 def demander_float(message):
     #demande un nombre réel à l'utilisateur et le renvoie
     #tant que la saisie n'est poas un nombre valide, on va redemander à l'user
