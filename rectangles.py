@@ -56,4 +56,4 @@ def rectangles_numpy(a, b, n, p1, p2, p3, p4):
     h = (b - a) / n  # largeur de chaque segment
     centres = np.linspace(a + h / 2, b - h / 2, n)    # np.linspace génère le tableau des n centres : [a+h/2, a+3h/2, ..., b-h/2]
     valeurs = polynome(centres, p1, p2, p3, p4)     # évaluation vectorisée : polynome reçoit un ndarray et retourne un ndarray
-    return h * np.sum(valeurs)  # I_rect ≈ h × Σ f(x_milieu_i)
+    return h * np.sum(valeurs)
