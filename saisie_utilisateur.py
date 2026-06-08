@@ -32,8 +32,8 @@ def demander_bornes():
     while True:
         a=demander_float("borne inférieure a : ")
         b = demander_float("borne supérieure b : ")
-        if a ==b :
-            print("Erreur : a et b doivent être différents, recommencez ")
+        if b<=a :
+            print("Erreur : la borne b doit être strictement supérieure à la borne a , recommencez ")
             continue #on redemande donc les 2 bornes
         return a, b
 
