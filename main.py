@@ -1,10 +1,12 @@
-from solution_analytique import fonction_polynome, solution_analytique
-from fonction_erreur import fonction_erreur
+from solution_analytique import solution_analytique
+from fonction_erreur import calculer_erreur
 from rectangles import rectangles_python, rectangles_numpy
-from trapezes import integration_trapezes, integration_trapezes_numpy
+from trapezes import integration_trapezes_python, integration_trapezes
 from simpson import simpson_python, simpson_numpy
 from saisie_utilisateur import demander_bornes, demander_entier_positif, demander_coefficients
 from analyse import convergence, generer_liste_n,tracer_convergence
+from methodes_preprogrammees import trapezes_scipy, simpson_scipy
+
 
 if __name__ == "__main__":
     print("veuillez saisir les paramètres de l'intégration: ")
@@ -61,6 +63,12 @@ if __name__ == "__main__":
     aire_simp_python = simpson_python(a, b, n, p1, p2, p3, p4)
     aire_simp_numpy = simpson_numpy(a, b, n, p1, p2, p3, p4)
 
+    # méthode des trapèzes SciPy
+    aire_trap_scipy = trapezes_scipy(a, b, n, p1, p2, p3, p4)
+
+    # méthode de Simpson SciPy
+    aire_simp_scipy = simpson_scipy(a, b, n, p1, p2, p3, p4)
+
 #calcul des erreurs analytique - numérique
 
     erreur_rect_python = calculer_erreur(aire_rect_python, valeur_exacte)
@@ -72,8 +80,10 @@ if __name__ == "__main__":
     erreur_simp_python = calculer_erreur(aire_simp_python, valeur_exacte)
     erreur_simp_numpy = calculer_erreur(aire_simp_numpy, valeur_exacte)
 
+    erreur_trap_scipy = calculer_erreur(aire_trap_scipy, valeur_exacte)
+    erreur_simp_scipy = calculer_erreur(aire_simp_scipy, valeur_exacte)
 
-#Résultats
+    #Résultats
     print(f"voci votre polynôme : f(x) = {p1} + {p2}x + {p3}x^2 + {p4}x^3")
     print(f"intervalle : [{a}, {b}]   ,   nombre de segments : n = {n}")
     print(f"Valeur exacte (analytique) : {valeur_exacte}")
@@ -94,3 +104,7 @@ if __name__ == "__main__":
     print(f"  NumPy  : aire = {aire_simp_numpy:.10f}   erreur = {erreur_simp_numpy:.2e}")
 
 
+    # méthodes pré-programmées (SciPy)
+    print("MÉTHODES PRÉ-PROGRAMMÉES (SciPy)")
+    print(f"  Trapèzes SciPy : aire = {aire_trap_scipy:.10f}   erreur = {erreur_trap_scipy:.2e}")
+    print(f"  Simpson  SciPy : aire = {aire_simp_scipy:.10f}   erreur = {erreur_simp_scipy:.2e}")
