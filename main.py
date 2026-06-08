@@ -6,6 +6,9 @@ from simpson import simpson_python, simpson_numpy
 from saisie_utilisateur import demander_bornes, demander_entier_positif, demander_coefficients
 from methodes_preprogrammees import trapezes_scipy, simpson_scipy
 
+from time import perf_counter
+from timeit import timeit
+
 
 if __name__ == "__main__":
     print("veuillez saisir les paramètres de l'intégration: ")
@@ -82,3 +85,33 @@ if __name__ == "__main__":
     print("MÉTHODES PRÉ-PROGRAMMÉES (SciPy)")
     print(f"  Trapèzes SciPy : aire = {aire_trap_scipy:.10f}   erreur = {erreur_trap_scipy:.2e}")
     print(f"  Simpson  SciPy : aire = {aire_simp_scipy:.10f}   erreur = {erreur_simp_scipy:.2e}")
+
+    PARAMETRES = (a, b, n, p1, p2, p3, p4)
+    REPETITIONS = demander_entier_positif("nombre de répétitions pour le benchmark: ")
+
+    methodes = [
+        ("Rectangles Python",  rectangles_python),
+        ("Rectangles NumPy ",  rectangles_numpy),
+        ("Trapèzes    Python", integration_trapezes_python),
+        ("Trapèzes    NumPy ", integration_trapezes),
+        ("Simpson     Python", simpson_python),
+        ("Simpson     NumPy ", simpson_numpy),
+        ("Trapèzes    SciPy ", trapezes_scipy),
+        ("Simpson     SciPy ", simpson_scipy),
+    ]
+
+    print("\n" + "=" * 60)
+    print("  BENCHMARK")
+    print("=" * 60)
+
+    print(f"\n─ perf_counter (une seule exécution) ─")
+    for nom, fn in methodes:
+        tic = perf_counter()
+        fn(*PARAMETRES)
+        toc = perf_counter()
+        print(f"  {nom} : {toc - tic:.6f} [s]")
+
+    print(f"\n─ timeit ({REPETITIONS} répétitions) ─")
+    for nom, fn in methodes:
+        total = timeit(lambda fn=fn: fn(*PARAMETRES), number=REPETITIONS)
+        print(f"  {nom} : total = {total:.4f} [s]  |  moyenne = {total / REPETITIONS:.6f} [s]")
