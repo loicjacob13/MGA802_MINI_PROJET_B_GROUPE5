@@ -1,5 +1,5 @@
 from fonction_erreur import calculer_erreur
-
+import matplotlib.pyplot as plt
 
 def convergence(fonction_integration, a, b, liste_n, p1, p2, p3, p4, valeur_exacte): #
     #ici fonction intégration servira à appeler chaque méthode différente
