@@ -43,13 +43,13 @@ def tracer_convergence(liste_n, dictionnaire_erreurs, nom_fichier="convergence.p
         liste_erreurs = dictionnaire_erreurs[nom_methode]
         ax.loglog(liste_n, liste_erreurs,marker='o', label=nom_methode) #axe log log pour les axes x et y
 
-        #création titre, légende et grille
-        ax.set_xlabel("nombre de segments n")
-        ax.set_ylabel("erreur (en valeur absolue)")
-        ax.set_title("convergence des methodes d'integration")
-        ax.legend()
-        ax.grid(True, which="both")  # which="both" : grille sur grandes (puissances de 10) et petites graduations (valeurs intermédiaires)
+    #création titre, légende et grille
+    ax.set_xlabel("nombre de segments n")
+    ax.set_ylabel("erreur (en valeur absolue)")
+    ax.set_title("convergence des methodes d'integration")
+    ax.legend()
+    ax.grid(True, which="both")  # which="both" : grille sur grandes (puissances de 10) et petites graduations (valeurs intermédiaires)
 
-        # sauvegarde dans un fichier (l'extension determine le format) et l'affichage
-        fig.savefig(nom_fichier)
-        plt.show()
+    # sauvegarde dans un fichier (l'extension determine le format) et l'affichage
+    fig.savefig(nom_fichier)
+    plt.show()
