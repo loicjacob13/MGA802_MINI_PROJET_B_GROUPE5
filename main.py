@@ -1,6 +1,6 @@
 """
 MGA802 - Mini-Projet B
-Auteurs: Loïc Jacob, Fabien Koch, Guillaume Pissang
+Auteurs: Loïc Jacob (JACL93280301) ; Fabien Koch (KOCF83320301) ; Guillaume Pissang (PISG89300201)
 
 Point d'entrée principal du programme.
 - Demande à l'utilisateur les paramètres du polynôme, les bornes et le nombre de segments
