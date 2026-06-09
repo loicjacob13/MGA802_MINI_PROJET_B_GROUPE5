@@ -113,9 +113,10 @@ if __name__ == "__main__":
     print(f"  Trapèzes SciPy : aire = {aire_trap_scipy:.10f}   erreur = {erreur_trap_scipy:.2e}")
     print(f"  Simpson  SciPy : aire = {aire_simp_scipy:.10f}   erreur = {erreur_simp_scipy:.2e}")
 
-    PARAMETRES = (a, b, n, p1, p2, p3, p4)
+    PARAMETRES = (a, b, n, p1, p2, p3, p4) #tuple des paramètres pour éviter de répéter les 7 arguments à chaque appel
     REPETITIONS = demander_entier_positif("nombre de répétitions pour le benchmark: ")
 
+    # liste des méthodes : chaque entrée est (nom affiché, fonction à appeler)
     methodes = [
         ("Rectangles Python", rectangles_python),
         ("Rectangles NumPy ", rectangles_numpy),
@@ -130,8 +131,8 @@ if __name__ == "__main__":
     print("\n" + "=" * 60)
     print("  BENCHMARK")
     print("=" * 60)
-    benchmark_perf_counter(methodes, PARAMETRES, valeur_exacte)
-    benchmark_timeit(methodes, PARAMETRES, REPETITIONS)
+    benchmark_perf_counter(methodes, PARAMETRES, valeur_exacte) # une seule exécution par méthode
+    benchmark_timeit(methodes, PARAMETRES, REPETITIONS) # moyenne sur N répétitions
 
 #graphique du temps de calcul vs n
     dictionnaire_temps = {
