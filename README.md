@@ -1,7 +1,6 @@
 # Mini-Projet B — Intégration numérique (MGA802)
 
-Auteurs : Loïc Jacob, Fabien Koch, Guillaume Pissang
-
+Auteurs: Loïc Jacob (JACL93280301) ; Fabien Koch (KOCF83320301) ; Guillaume Pissang (PISG89300201)
 ## 1. À quoi sert ce programme
 
 Ce programme calcule l'aire sous la courbe d'une fonction polynomiale du 3e ordre :
