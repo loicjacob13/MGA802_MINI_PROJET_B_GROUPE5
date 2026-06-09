@@ -1,20 +1,3 @@
-"""
-MGA802 - Mini-Projet B
-Auteurs: Loïc Jacob, Fabien Koch, Guillaume Pissang
-
-Description:
-Module d'intégration numérique avec la méthode des rectangles (point milieu).
-On calcule l'aire sous la courbe d'une fonction polynomiale du 3e ordre :
-    f(x) = p1 + p2*x + p3*x^2 + p4*x^3
-sur l'intervalle [a, b] divisé en n segments réguliers
-La fonction est évaluée au centre de chaque segment, ce qui va former
-n rectangles dont la somme des aires approche l'intégrale
-
-Objectifs:
-    - Implémenter la méthode des rectangles en Python de base
-    - Implémenter la même méthode vectorisée avec NumPy
-"""
-
 import numpy as np  # importation de NumPy pour la version vectorisée
 
 

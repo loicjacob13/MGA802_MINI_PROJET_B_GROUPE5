@@ -9,10 +9,9 @@ def trapezes_scipy(a, b, n, p1, p2, p3, p4):
     """
     Intégration par la méthode des trapèzes via scipy.integrate.trapezoid.
     """
-    x = np.linspace(a, b, n + 1)
-    y = polynome(x, p1, p2, p3, p4)
-    return float(trapezoid(y, x))
-
+    x = np.linspace(a, b, n + 1) #n+1 points réguliers pour délimiter n segments
+    y = polynome(x, p1, p2, p3, p4) #évaluation vectorisée du polynôme sur tous les points
+    return float(trapezoid(y, x)) #scipy calcule la somme des trapèzes directement
 
 def simpson_scipy(a, b, n, p1, p2, p3, p4):
     """
@@ -20,6 +19,6 @@ def simpson_scipy(a, b, n, p1, p2, p3, p4):
     """
     if n % 2 != 0:
         n += 1  # on arrondit vers le haut pour ne pas perdre de précision
-    x = np.linspace(a, b, n + 1)
-    y = polynome(x, p1, p2, p3, p4)
-    return float(simpson(y, x=x))
+    x = np.linspace(a, b, n + 1) #n+1 points réguliers
+    y = polynome(x, p1, p2, p3, p4) #évaluation vectorisée
+    return float(simpson(y, x=x)) #x=x précise l'axe des abscisses à scipy

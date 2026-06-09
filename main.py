@@ -1,3 +1,15 @@
+"""
+MGA802 - Mini-Projet B
+Auteurs: Loïc Jacob, Fabien Koch, Guillaume Pissang
+
+Point d'entrée principal du programme.
+- Demande à l'utilisateur les paramètres du polynôme, les bornes et le nombre de segments
+- Calcule l'intégrale par 8 méthodes (rectangles, trapèzes, Simpson en Python/NumPy/SciPy)
+- Affiche les résultats et les erreurs par rapport à la solution analytique exacte
+- Trace les graphiques de convergence et de temps de calcul
+- Lance le benchmark perf_counter et timeit sur toutes les méthodes
+"""
+
 from solution_analytique import solution_analytique
 from fonction_erreur import calculer_erreur
 from rectangles import rectangles_python, rectangles_numpy
@@ -88,33 +100,33 @@ if __name__ == "__main__":
     erreur_simp_scipy = calculer_erreur(aire_simp_scipy, valeur_exacte)
 
     #Résultats
-    print(f"voci votre polynôme : f(x) = {p1} + {p2}x + {p3}x^2 + {p4}x^3")
+    print(f"\nVoici votre polynôme : f(x) = {p1} + {p2}x + {p3}x^2 + {p4}x^3")
     print(f"intervalle : [{a}, {b}]   ,   nombre de segments : n = {n}")
-    print(f"Valeur exacte (analytique) : {valeur_exacte}")
+    print(f"La valeur exacte (analytique) est : {valeur_exacte}")
 
     #méthode rectangle
-    print("MÉTHODE DES RECTANGLES")
+    print("\nMÉTHODE DES RECTANGLES")
     print(f"  Python : aire = {aire_rect_python:.10f}   erreur = {erreur_rect_python:.2e}")#.10f --> 10 décimales, .2e format exponentielle avec 2 décimales
     print(f"  NumPy  : aire = {aire_rect_numpy:.10f}   erreur = {erreur_rect_numpy:.2e}")
 
     #méthode des trapèzes
-    print("MÉTHODE DES TRAPÈZES")
+    print("\nMÉTHODE DES TRAPÈZES")
     print(f"  Python : aire = {aire_trap_python:.10f}   erreur = {erreur_trap_python:.2e}")
     print(f"  NumPy  : aire = {aire_trap_numpy:.10f}   erreur = {erreur_trap_numpy:.2e}")
 
     #méthode simpson
-    print("MÉTHODE DE SIMPSON")
+    print("\nMÉTHODE DE SIMPSON")
     print(f"  Python : aire = {aire_simp_python:.10f}   erreur = {erreur_simp_python:.2e}")
     print(f"  NumPy  : aire = {aire_simp_numpy:.10f}   erreur = {erreur_simp_numpy:.2e}")
 
 
     # méthodes pré-programmées (SciPy)
-    print("MÉTHODES PRÉ-PROGRAMMÉES (SciPy)")
+    print("\nMÉTHODES PRÉ-PROGRAMMÉES (SciPy)")
     print(f"  Trapèzes SciPy : aire = {aire_trap_scipy:.10f}   erreur = {erreur_trap_scipy:.2e}")
     print(f"  Simpson  SciPy : aire = {aire_simp_scipy:.10f}   erreur = {erreur_simp_scipy:.2e}")
 
     PARAMETRES = (a, b, n, p1, p2, p3, p4) #tuple des paramètres pour éviter de répéter les 7 arguments à chaque appel
-    REPETITIONS = demander_entier_positif("nombre de répétitions pour le benchmark: ")
+    REPETITIONS = demander_entier_positif("\nnombre de répétitions pour le benchmark: ")
 
     # liste des méthodes : chaque entrée est (nom affiché, fonction à appeler)
     methodes = [
